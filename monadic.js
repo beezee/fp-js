@@ -1,5 +1,7 @@
 const m = require('./monad.js');
 
+// guessF :: { get: (f number), incorrect: (f ()) }
+
 const guessId = (guess) => ({
   get: () => { if (isNaN(parseInt(guess))) {
     throw new Error("guess is required");
