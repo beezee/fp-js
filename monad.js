@@ -71,3 +71,5 @@ const ReaderM = {
 
 f.assert("bind Reader monad")(4)(
   ReaderM.bind(compose(ReaderM.return, f.add2))((x) => x)(2));
+
+module.exports = { IdM, MaybeM, EitherM, ReaderM }
