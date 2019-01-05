@@ -20,7 +20,7 @@ const add2 = (x) => x + 2;
 // Id a = a
 // Id fmap :: (a -> b) -> (Id a -> Id b)
 const Id = {
-  fmap: (f) => (fa) => "implement me"
+  fmap: (f) => (fa) => f(fa)
 }
 
 assert("fmap Id functor")(4)(Id.fmap(add2)(2));
@@ -30,7 +30,7 @@ assert("fmap Id functor")(4)(Id.fmap(add2)(2));
 // when a is null, the result of fmap should be null,
 // when a is not null, the result of fmap should be b
 const Maybe = {
-  fmap: (f) => (fa) => "implement me"
+  fmap: (f) => (fa) => fa ? f(fa) : fa
 }
 
 assert("fmap Maybe functor, value present")(4)(
@@ -48,7 +48,7 @@ assert("fmap Maybe functor, no value present")(null)(
 // left takes priority, so if left is not null,
 // always assume that right is
 const Either = {
-  fmap: (f) => (fa) => "implement me"
+  fmap: (f) => (fa) => fa.left ? fa : {left: null, right: f(fa.right)}
 }
 
 assert("fmap Either functor, right value")({left: null, right: 4})(
@@ -62,8 +62,10 @@ assert("fmap Either functor, left value")(
 // Reader r a = r -> a
 // Reader fmap :: (a -> b) -> Reader a -> Reader b
 const Reader = {
-  fmap: (f) => (fa) => ((x) => "implement me")
+  fmap: (f) => (fa) => ((x) => f(fa(x)))
 }
 
 assert("fmap Reader functor")(4)(
   Reader.fmap(add2)((x) => x)(2));
+
+module.exports = { assert, add2, Id, Maybe, Either, Reader }
