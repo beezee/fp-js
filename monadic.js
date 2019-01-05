@@ -25,9 +25,9 @@ const guessEither = (guess) => ({
   incorrect: () => ({left: "Guess " + guess + " is incorrect"})
 });
 
-const guessReader = (guess) => ({
-  get: () => (r) => guessId(guess).get(),
-  incorrect: () => (r) => guessId(guess).incorrect()
+const guessReader = ({
+  get: () => (guess) => guessId(guess).get(),
+  incorrect: () => (guess) => guessId(guess).incorrect()
 });
 
 const guessM = (answer) => (monad) => (guessAlg) =>
@@ -40,8 +40,8 @@ const guessM = (answer) => (monad) => (guessAlg) =>
 const log = console.log;
 
 log("\nID");
-// guessM(2)(m.IdM)(guessId(3)) // blows up
-// guessM(2)(m.IdM)(guessId("NaN")) // blows up
+// guessM(2)(m.IdM)(guessId(3)); // blows up
+// guessM(2)(m.IdM)(guessId("NaN")); // blows up
 log(guessM(2)(m.IdM)(guessId(2)));
 
 log("\nMaybe");
@@ -55,5 +55,5 @@ log(guessM(2)(m.EitherM)(guessEither(3)));
 log(guessM(2)(m.EitherM)(guessEither(2)));
 
 log("\nReader")
-// log(guessM(2)(m.ReaderM)(guessReader(3))("run")); // blows up
-log(guessM(2)(m.ReaderM)(guessReader(2))("run"));
+// log(guessM(2)(m.ReaderM)(guessReader)(3)); // blows up
+log(guessM(2)(m.ReaderM)(guessReader)(2));
