@@ -6,6 +6,7 @@ const compose = (f1, f2) => (a) => f1(f2(a));
 // IdM (
 //  return :: a -> IdM a
 //  join :: IdM (IdM a) -> IdM a
+//  bind :: (a -> IdM b) -> IdM a -> IdM b
 const IdM = {
   return: (a) => "implement me",
   join: (a) => "implement me",
