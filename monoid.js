@@ -81,8 +81,8 @@ assert("String pair concat works")(["foobarbaz", "barbazfoo"])(
 // And use diagonal to get an addition monoid for pair [number, number]
 const AddPair = diagonal(NumericAddition);
 
-// with AddPair, we can average an array with foldMap. fix the avgPair function
-// to make the assertion pass
+// with AddPair, we can average an array with foldMap. 
+// TODO - fix the avgPair function to make the assertion pass
 const avgPair = (x) => [10, 20];
 const divArray = (x) => x[0] / x[1];
 assert("AddPair allows clean averaging of numeric arrays")(3)(
